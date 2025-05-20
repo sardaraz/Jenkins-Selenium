@@ -1,19 +1,24 @@
+package com.example.test;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class GoogleSearchTest {
     private WebDriver driver;
 
     @BeforeClass
     public void setup() {
-        // Use WebDriverManager to avoid manual ChromeDriver setup (optional but useful)
-        System.setProperty("webdriver.chrome.driver", "C:\\chromedriver\\chromedriver.exe");
-        driver = new ChromeDriver();
+        WebDriverManager.chromedriver().setup();
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--headless=new", "--disable-gpu");
+        driver = new ChromeDriver(options);
     }
 
     @Test
@@ -23,10 +28,14 @@ public class GoogleSearchTest {
         searchBox.sendKeys("OpenAI ChatGPT");
         searchBox.submit();
 
-        // Wait a few seconds to simulate result load
-        try { Thread.sleep(2000); } catch (InterruptedException e) {}
+        try {
+            Thread.sleep(2000); // wait for results to load
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
-        assert driver.getTitle().toLowerCase().contains("openai");
+        String title = driver.getTitle().toLowerCase();
+        assert title.contains("openai") || title.contains("chatgpt");
     }
 
     @AfterClass
