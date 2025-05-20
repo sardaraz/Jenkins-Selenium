@@ -13,7 +13,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/your/repo.git' // replace with actual repo
+                git 'https://github.com/sardaraz/Jenkins-Selenium.git' // replace with actual repo
             }
         }
 
