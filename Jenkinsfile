@@ -2,24 +2,20 @@ pipeline {
     agent any
 
     tools {
-        maven 'Maven 3.9.9'
-        jdk 'JDK 21'
-    }
-
-    environment {
-        PATH = "/usr/bin:$PATH"  // Make sure chromedriver is in path
+        jdk 'JDK 21'              // Match the name set in Jenkins > Global Tool Configuration
+        maven 'Maven 3.9.9'       // Match the name set in Jenkins > Global Tool Configuration
     }
 
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/sardaraz/Jenkins-Selenium.git' // replace with actual repo
+                git 'https://github.com/sardaraz/Jenkins-Selenium.git'
             }
         }
 
         stage('Build and Test') {
             steps {
-                sh 'mvn clean test'
+                bat 'mvn clean test'
             }
         }
     }
