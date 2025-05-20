@@ -5,13 +5,19 @@ pipeline {
         jdk 'JDK 21'              // Match the name set in Jenkins > Global Tool Configuration
         maven 'Maven 3.9.9'       // Match the name set in Jenkins > Global Tool Configuration
     }
-
+   
     stages {
         stage('Checkout') {
             steps {
                 git 'https://github.com/sardaraz/Jenkins-Selenium.git'
             }
         }
+        stage('Debug Maven') {
+             steps {
+        bat 'where mvn'
+        bat 'mvn -version'
+           }
+    }
 
         stage('Build and Test') {
             steps {
