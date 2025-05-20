@@ -12,7 +12,7 @@ public class GoogleSearchTest {
     @BeforeClass
     public void setup() {
         // Use WebDriverManager to avoid manual ChromeDriver setup (optional but useful)
-        System.setProperty("webdriver.chrome.driver", "/usr/bin/chromedriver");
+        System.setProperty("webdriver.chrome.driver", "C:\\chromedriver\\chromedriver.exe");
         driver = new ChromeDriver();
     }
 
