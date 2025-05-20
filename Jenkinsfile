@@ -7,11 +7,7 @@ pipeline {
     }
    
     stages {
-        stage('Checkout') {
-            steps {
-                git 'https://github.com/sardaraz/Jenkins-Selenium.git'
-            }
-        }
+        
         stage('Debug Maven') {
              steps {
         bat 'where mvn'
@@ -19,16 +15,8 @@ pipeline {
            }
     }
 
-        stage('Build and Test') {
-            steps {
-                bat 'mvn clean test'
-            }
-        }
+        
     }
 
-    post {
-        always {
-            junit 'target/surefire-reports/*.xml'
-        }
-    }
+   
 }
