@@ -1,28 +1,17 @@
 pipeline {
     agent any
 
-    tools {
-        jdk 'JDK 21'              // Match the name set in Jenkins > Global Tool Configuration
-        maven 'Maven 3.9.9'       // Match the name set in Jenkins > Global Tool Configuration
-    }
-
     stages {
-        stage('Checkout') {
+        stage('Build') {
             steps {
-                git 'https://github.com/sardaraz/Jenkins-Selenium.git'
+                // Run the Python code
+               bat 'javac HelloWorld.java'
             }
         }
-
-        stage('Build and Test') {
+        stage('Run') {
             steps {
-                bat 'mvn clean test'
+               bat 'java HelloWorld'
             }
-        }
-    }
-
-    post {
-        always {
-            junit 'target/surefire-reports/*.xml'
         }
     }
 }
