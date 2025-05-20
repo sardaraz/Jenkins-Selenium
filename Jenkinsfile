@@ -13,6 +13,12 @@ pipeline {
         bat 'where mvn'
         bat 'mvn -version'
            }
+            stage('Build and Test') {
+            steps {
+                bat 'mvn clean test'
+            }
+        }
+    }
     }
 
         
